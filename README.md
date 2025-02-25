@@ -1,13 +1,25 @@
-# Etapes d'Installation
+# Étapes d'installation
+
 ### Cloner le dépôt Git
-https://github.com/lakrounehamza/GrandTaxiGo.git
-cd grandtaxigo
+```sh
+git clone https://github.com/lakrounehamza/GrandTaxiGo.git
+cd GrandTaxiGo
 ### Installer les dépendances
+sh
+Copier
+Modifier
 composer install
 npm install
-### Configurer l'environnement
+Configurer l'environnement
+sh
+Copier
+Modifier
 cp .env.example .env
 php artisan key:generate
-Modifier .env pour configurer la base de données PostgreSQL.
-### Lancer le serveur
+Modifiez le fichier .env pour configurer la base de données PostgreSQL.
+
+Lancer le serveur
+sh
+Copier
+Modifier
 php artisan serve
