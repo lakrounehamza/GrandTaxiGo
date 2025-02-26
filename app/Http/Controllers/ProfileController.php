@@ -20,7 +20,9 @@ class ProfileController extends Controller
             'user' => $request->user(),
         ]);
     }
-
+    public function getId(){
+        return AUHT::user->id;
+    }
     /**
      * Update the user's profile information.
      */
