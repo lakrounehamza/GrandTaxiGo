@@ -26,7 +26,7 @@
 
 
 <div class="max-w-2xl mt-4 mx-auto bg-gray-900 shadow-lg rounded-2xl">
-  <form method="POST" action="{{}}">
+  <form method="POST" action="{{route()}}">
     <div class="px-6 py-5">
       <div class="flex items-start">
         <div class="flex-grow truncate">
@@ -48,8 +48,8 @@
         </div>  
       </div>
     </div>
-    <input value="3"  class="hidedn" name="id_passager"/>
-    <input value="2" class="hidedn"  name="id_trajet"/>
+    <input value="3"  class="hidden" name="id_passager"/>
+    <input value="2" class="hidden"  name="id_trajet"/>
   </form>
 </div>
 

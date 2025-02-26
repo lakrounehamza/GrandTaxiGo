@@ -2,13 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PassagerController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ChauffeurController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/dashboard2', function () {
     $id = Auth::user()->id; 
     return view('dashboard',["id"=>$id]);
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -20,5 +22,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/home' , [PassagerController::class ,'index'])->name('home');
+Route::get('/reservation',[ReservationController::class,'index'])->name('reservation');
+Route::get('/dashboardE',[ChauffeurController::class,'dashbord']);
 
 require __DIR__.'/auth.php';
