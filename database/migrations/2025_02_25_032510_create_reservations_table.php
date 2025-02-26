@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('statut');
+            $table->enum('statut', ['encours', 'accepte', 'annule'])->default('encours');
+            $table->foreignId('id_passager')->constrained('passagers')->onDelete('cascade');
+            $table->foreignId('id_trajet')->constrained('trajets')->onDelete('cascade');
             $table->timestamps();
-        });
+    });
+
     }
 
     /**

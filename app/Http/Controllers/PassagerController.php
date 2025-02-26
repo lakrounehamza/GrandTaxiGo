@@ -11,7 +11,7 @@ class PassagerController extends Controller
      */
     public function index()
     {
-        //
+        return  view('passager.home');
     }
 
     /**

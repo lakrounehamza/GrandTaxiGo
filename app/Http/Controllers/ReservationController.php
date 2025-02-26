@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Reservation;
 
 class ReservationController extends Controller
 {
@@ -24,10 +25,13 @@ class ReservationController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *  statut | id_passager | id_trajet
      */
     public function store(Request $request)
     {
-        //
+       // je  veux  utilise pas le validatioin  de request car  le statut deja par default encours  et  ona soufe id de trajet et passager  
+        Reservation::create($request->post());
+        return redirect('passager.home'); 
     }
 
     /**
