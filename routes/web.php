@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/home' , [PassagerController::class ,'index'])->name('home');
 Route::get('/reservation',[ReservationController::class,'index'])->name('reservation');
-Route::get('/dashboardE',[ChauffeurController::class,'dashbord']);
+Route::get('/dashboard',[ChauffeurController::class,'dashbord']);
+Route::post('/dashboard/accepte/{id}' ,[ChauffeurController::class, 'accepte'])->name('reservation.accepte');
+Route::post('/dashboard/annule/{$id}' ,[ChauffeurController::class, 'annule'])->name('reservation.annule');
 
 require __DIR__.'/auth.php';

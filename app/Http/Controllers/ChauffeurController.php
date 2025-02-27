@@ -47,9 +47,21 @@ class ChauffeurController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     */
-    public function accepte(Request $request){
+     */ 
+    public function accepte (string $id){
+        // dd($id);
+        $reservation = Reservation::find($id);
+        $reservation->update(['statut'=>'accepte']);
+        return redirect('dashboard');
+    }
+    public function  annule(string $id){
+        // dd($id);
         
+        $reservation = Reservation::find($id);
+        $reservation->update(['statut'=>'annule']);
+        return redirect('dashboard');
+
+
     }
     public function store(Request $request)
     {

@@ -30,9 +30,13 @@
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">{{$reservation->statutRes}}</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-                <form method="POST" action="">
-                    <input name="id" value="{{$reservation->id}}" class="hidden">
+                <form method="POST" action="{{route('reservation.accepte',$reservation->id)}}">
+                    @csrf
                     <button  type="submit" name="accepte" class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">accepte</button>
+                </form>
+
+                <form method="POST" action="{{route('reservation.annule',$reservation->id)}}"> 
+                @csrf               
                     <button type="submit" name="annule" class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out">annule</button>
                 </form>
             </td>
