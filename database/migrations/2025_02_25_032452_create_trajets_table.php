@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('statut');
             $table->string('depart');
             $table->string('arrive');
-            $table->bigInteger('id_chauffeur');
+            $table->bigInteger('id_chauffeur')->unsigned();
+            $table->foreign('id_chauffeur')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

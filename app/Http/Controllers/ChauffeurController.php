@@ -21,7 +21,9 @@ class ChauffeurController extends Controller
      */
     public function create()
     {
-        //
+        $id = Auth::user()->id;
+        // dd($id);
+        return view('chauffeur.ajouteTrajet',['id'=>$id]);
     }
     public function  dashbord(){
         $id = Auth::user()->id;
@@ -39,22 +41,19 @@ class ChauffeurController extends Controller
         // ->select('trajets.*', 'reservations.*') // Sélection explicite des colonnes
         // ->get();
 
-        $lesReservation = Trajet::where('id_chauffeur', '=', $id)->join('reservations','trajets.id','=','reservations.id_trajet')->join('users','reservations.id_passager','=','users.id')->select('trajets.statut as Trastatut','trajets.depart' ,'trajets.arrive','users.name' ,'users.email','reservations.id' , 'reservations.statut as statutRes ','reservations.updated_at' )->get();
+        $lesReservation = Trajet::where('id_chauffeur', '=', $id)->join('reservations','trajets.id','=','reservations.id_trajet')->join('users','reservations.id_passager','=','users.id')->where('reservations.statut','=','encours')->select('trajets.statut as Trastatut','trajets.depart' ,'trajets.arrive','users.name' ,'users.email','reservations.id' , 'reservations.statut as statutRes ','reservations.updated_at' )->get();
 
         // dd($lesReservations);
          return view('chauffeur.dashboard',['lesReservation' => $lesReservation]);
     } 
 
-    /**
-     * Store a newly created resource in storage.
-     */ 
     public function accepte (string $id){
         // dd($id);
         $reservation = Reservation::find($id);
         $reservation->update(['statut'=>'accepte']);
         return redirect('dashboard');
     }
-    public function  annule(string $id){
+    public function  annule (string $id){
         // dd($id);
         
         $reservation = Reservation::find($id);
@@ -63,10 +62,36 @@ class ChauffeurController extends Controller
 
 
     }
-    public function store(Request $request)
-    {
-        //
-    }
+
+    /**
+     * Store a newly created resource in storage.
+     */ 
+   public function store(Request $request)
+{
+    // Validate the request data
+    $validated = $request->validate([
+        'statut' =>'required',
+        'depart' => 'required|string|max:255', 
+        'arrive' => 'required|string|max:255',
+        'id_chauffeur' => 'required',
+    ]);
+    // dd($validated);
+
+    // Store the validated data into the Trajet model
+    Trajet::create($validated);
+
+
+    // Redirect or return a response
+    return redirect('listeTrajet'); // Or you can return something else
+}
+
+public function lesTrajet(){
+    $id = Auth::user()->id;
+    // dd($id);
+    $lestrajet = Trajet::where('id_chauffeur','=',$id)->get();
+    // dd($lestrajet);
+    return view ('chauffeur.listeTrajet',['lestrajet'=> $lestrajet]);
+}
 
     /**
      * Display the specified resource.
@@ -81,7 +106,10 @@ class ChauffeurController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // dd($id);
+        $trajet = Trajet::find($id);
+
+        return view('chauffeur.editTrajet',['trajet'=>$trajet]);
     }
 
     /**
@@ -89,7 +117,16 @@ class ChauffeurController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $trajet = Trajet::find($id);
+        dd($id);
+        $validated = $request->validate([
+        'statut' =>'required',
+        'depart' => 'required|string|max:255', 
+        'arrive' => 'required|string|max:255',
+        'id_chauffeur' => 'required',
+        ]);
+        // dd($validated);
+        
     }
 
     /**
@@ -97,6 +134,8 @@ class ChauffeurController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $trajet = Trajet::find($id);
+        $trajet->delete();
+        return redirect('dashboard');
     }
 }
