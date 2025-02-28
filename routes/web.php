@@ -31,11 +31,13 @@ Route::post('/dashboard/accepte/{id}' ,[ChauffeurController::class, 'accepte'])-
 Route::post('/dashboard/annule/{id}' ,[ChauffeurController::class, 'annule'])->name('reservation.annule');
 Route::get('/trajet' ,[ChauffeurController::class, 'create'])->name('trajet.create');
 // Route::get('/lesTrajet' ,[ChauffeurController::class, 'lesTrajet'])->name('trajet.create');
-// Route::post('/trajet' ,[ChauffeurController::class, 'store'])->name('trajet.store');
+Route::post('/trajets' ,[ChauffeurController::class, 'store'])->name('trajet.store');
 Route::get('/trajet/dashboard' ,[ChauffeurController::class, 'lesTrajet'])->name('trajet.lesTrajet');
 Route::get('/trajet/edit/{id}',[ChauffeurController::class ,'edit'])->name('trajet.edit');
 Route::post('/trajet/update/{id}',[ChauffeurController::class ,'update'])->name('trajet.update');
 Route::delete('/trajet/delete/{id}',[ChauffeurController::class ,'destroy'])->name('trajet.delete');
+Route::post('/create/reservation' ,[ReservationController::class,'store'])->name('reservation.store');
+
 
 
 

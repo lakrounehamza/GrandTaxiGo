@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Trajet;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PassagerController extends Controller
 {
@@ -14,7 +15,7 @@ class PassagerController extends Controller
     public function index()
     {
         $lesTrajet = Trajet::join('users','users.id','trajets.id_chauffeur')->select('trajets.*','users.name','users.email')->get();
-        return  view('passager.home',['lesTrajet' => $lesTrajet]);
+        return view('passager.home', ['lesTrajet' => $lesTrajet]);
     }
     public function  dashbord(){
         $id = Auth::user()->id;
@@ -35,7 +36,7 @@ class PassagerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
