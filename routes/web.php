@@ -24,20 +24,28 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/home' , [PassagerController::class ,'index'])->name('home');
-Route::get('/reservation',[ReservationController::class,'index'])->name('reservation');
-Route::get('/dashboard',[ChauffeurController::class,'dashbord'])->name('dashboard.dashbord');
-Route::post('/dashboard/accepte/{id}' ,[ChauffeurController::class, 'accepte'])->name('reservation.accepte');
-Route::post('/dashboard/annule/{id}' ,[ChauffeurController::class, 'annule'])->name('reservation.annule');
-Route::get('/trajet' ,[ChauffeurController::class, 'create'])->name('trajet.create');
-// Route::get('/lesTrajet' ,[ChauffeurController::class, 'lesTrajet'])->name('trajet.create');
-Route::post('/trajets' ,[ChauffeurController::class, 'store'])->name('trajet.store');
-Route::get('/trajet/dashboard' ,[ChauffeurController::class, 'lesTrajet'])->name('trajet.lesTrajet');
-Route::get('/trajet/edit/{id}',[ChauffeurController::class ,'edit'])->name('trajet.edit');
-Route::post('/trajet/update/{id}',[ChauffeurController::class ,'update'])->name('trajet.update');
-Route::delete('/trajet/delete/{id}',[ChauffeurController::class ,'destroy'])->name('trajet.delete');
-Route::post('/create/reservation' ,[ReservationController::class,'store'])->name('reservation.store');
-Route::get('/dashboardC',[PassagerController::class,'dashbord'])->name('dashboardC.dashboard');
+
+
+Route::middleware(['role:passager'])->group(function() {
+    Route::get('/home' , [PassagerController::class ,'index'])->name('home');
+    Route::get('/dashboardC',[PassagerController::class,'dashbord'])->name('dashboardC.dashboard');
+    Route::post('/create/reservation' ,[ReservationController::class,'store'])->name('reservation.store');
+    Route::get('/reservation',[ReservationController::class,'index'])->name('reservation');
+});
+
+
+Route::middleware(['role:chauffeur'])->group(function() {
+    Route::get('/dashboard',[ChauffeurController::class,'dashbord'])->name('dashboard.dashbord');
+    Route::post('/dashboard/accepte/{id}' ,[ChauffeurController::class, 'accepte'])->name('reservation.accepte');
+    Route::post('/dashboard/annule/{id}' ,[ChauffeurController::class, 'annule'])->name('reservation.annule');
+    Route::get('/trajet' ,[ChauffeurController::class, 'create'])->name('trajet.create');
+    Route::post('/trajets' ,[ChauffeurController::class, 'store'])->name('trajet.store');
+    Route::get('/trajet/dashboard' ,[ChauffeurController::class, 'lesTrajet'])->name('trajet.lesTrajet');
+    Route::get('/trajet/edit/{id}',[ChauffeurController::class ,'edit'])->name('trajet.edit');
+    Route::post('/trajet/update/{id}',[ChauffeurController::class ,'update'])->name('trajet.update');
+    Route::delete('/trajet/delete/{id}',[ChauffeurController::class ,'destroy'])->name('trajet.delete');
+});
+
 
 
 

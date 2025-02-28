@@ -76,4 +76,9 @@ class PassagerController extends Controller
     {
         //
     }
+    public function __construct()
+    {
+        $this->middleware('role:passager');
+    }
+
 }

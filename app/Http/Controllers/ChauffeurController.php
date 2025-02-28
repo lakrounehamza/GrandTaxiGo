@@ -139,4 +139,10 @@ public function lesTrajet(){
         $trajet->delete();
         return redirect('dashboard');
     }
+    public function __construct()
+    {
+        $this->middleware('role:chauffeur');
+    }
+
+  
 }
