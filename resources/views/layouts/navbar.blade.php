@@ -8,21 +8,20 @@
         </div>
         <ul class="hidden items-center justify-center gap-6 md:flex">
             <li class="pt-1.5 font-dm text-sm font-medium text-slate-700">
-                <a href="#">Pricing</a>
+                <a href="{{route('trajet.lesTrajet')}}">les trajets</a>
             </li>
             <li class="pt-1.5 font-dm text-sm font-medium text-slate-700">
-                <a href="#">Blog</a>
+                <a href="{{route('dashboard.dashbord')}}">les reservation </a>
             </li>
             <li class="pt-1.5 font-dm text-sm font-medium text-slate-700">
-                <a href="#">Docs</a>
+                <a href="{{route('trajet.create')}}">ajoute trajet</a>
             </li>
         </ul>
         <div class="flex-grow"></div>
         <div class="hidden items-center justify-center gap-6 md:flex">
             <a href="#" class="font-dm text-sm font-medium text-slate-700">Sign in</a>
-            <a href="#"
-                class="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]">Sign
-                up for free
+            <a href="{{route('logout')}}"
+                class="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"> log out
             </a>
         </div>
         <div class="relative flex items-center justify-center md:hidden">

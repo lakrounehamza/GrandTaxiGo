@@ -27,6 +27,7 @@ class ChauffeurController extends Controller
     }
     public function  dashbord(){
         $id = Auth::user()->id;
+        // dd($id);
         // $mesTrajet = Trajet::where('id_chauffeur', '=', $id)->get();
         // dd($mesTrajet);
         // $lesReservation = Reservation::whereIn('id_trajet', $mesTrajet->pluck('id'))->get();
@@ -43,7 +44,7 @@ class ChauffeurController extends Controller
 
         $lesReservation = Trajet::where('id_chauffeur', '=', $id)->join('reservations','trajets.id','=','reservations.id_trajet')->join('users','reservations.id_passager','=','users.id')->where('reservations.statut','=','encours')->select('trajets.statut as Trastatut','trajets.depart' ,'trajets.arrive','users.name' ,'users.email','reservations.id' , 'reservations.statut as statutRes ','reservations.updated_at' )->get();
 
-        // dd($lesReservations);
+        // dd($lesReservation);
          return view('chauffeur.dashboard',['lesReservation' => $lesReservation]);
     } 
 
@@ -82,7 +83,7 @@ class ChauffeurController extends Controller
 
 
     // Redirect or return a response
-    return redirect('listeTrajet'); // Or you can return something else
+    return redirect('dashboard'); // Or you can return something else
 }
 
 public function lesTrajet(){
@@ -108,7 +109,7 @@ public function lesTrajet(){
     {
         // dd($id);
         $trajet = Trajet::find($id);
-
+        // dd($trajet);
         return view('chauffeur.editTrajet',['trajet'=>$trajet]);
     }
 
@@ -118,7 +119,7 @@ public function lesTrajet(){
     public function update(Request $request, string $id)
     {
         $trajet = Trajet::find($id);
-        dd($id);
+        // dd($id);
         $validated = $request->validate([
         'statut' =>'required',
         'depart' => 'required|string|max:255', 
