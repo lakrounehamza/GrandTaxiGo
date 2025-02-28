@@ -19,8 +19,14 @@ class PassagerController extends Controller
     }
     public function  dashbord(){
         $id = Auth::user()->id;
-        $lesReservation =  lesReservation::where('id_passager' ,'=' , $id)->get();
-        dd($lesReservation);
+        // dd($id);
+        $lestrajet = Trajet::join('reservations', 'trajets.id', '=', 'reservations.id_trajet')
+        ->where('reservations.id_passager', $id)
+        ->select('trajets.*')
+        ->get();
+        // dd($lestrajet);
+        return  view('passager.dashboard',['lestrajet'=>$lestrajet]);
+
     }
 
     /**

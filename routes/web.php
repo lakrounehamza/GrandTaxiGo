@@ -37,6 +37,7 @@ Route::get('/trajet/edit/{id}',[ChauffeurController::class ,'edit'])->name('traj
 Route::post('/trajet/update/{id}',[ChauffeurController::class ,'update'])->name('trajet.update');
 Route::delete('/trajet/delete/{id}',[ChauffeurController::class ,'destroy'])->name('trajet.delete');
 Route::post('/create/reservation' ,[ReservationController::class,'store'])->name('reservation.store');
+Route::get('/dashboardC',[PassagerController::class,'dashbord'])->name('dashboardC.dashboard');
 
 
 
